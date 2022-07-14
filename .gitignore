@@ -1,6 +1,4 @@
 node_modules
-.env
-client/distf
 dist
 client/dist/
 webpack.config.js
