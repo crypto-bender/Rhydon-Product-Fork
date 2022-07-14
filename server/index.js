@@ -8,18 +8,14 @@ const Promise = require('bluebird');
 const controllers = require('./controllers.js');
 const helpers = require('./helpers.js');
 
-<<<<<<< HEAD
 const {
-  getReviews, getStyles, getRelated, getDetails,
-} = controllers;
+  getReviews, getStyles, getRelated, getDetails} = controllers;
 const { averageRating, promiseAllRelated, filterRelated, promiseAllDetails, filterDetails } = helpers;
-=======
 let {getReviews, getStyles, getRelated, getDetails} = controllers;
 
 // Overview Router
-overviewRouter = require('./overviewRouter.js');
+const overviewRouter = require('./overviewRouter.js');
 
->>>>>>> main
 // Setup Middleware
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../client/dist')));
