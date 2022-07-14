@@ -334,6 +334,15 @@ cursor: pointer;
   position: relative;
   float: left;
 <<<<<<< HEAD
+}
+
+.miniSlider {
+  height: 12vh;
+  justify-content: left;
+  display: flex;
+}
+=======
+<<<<<<< HEAD
   }
 
   .stars:before {
@@ -457,3 +466,4 @@ cursor: pointer;
 }
 >>>>>>> main
 >>>>>>> c22fdf024452df38cee5d5b2fde8509998145d0c
+>>>>>>> main
