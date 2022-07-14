@@ -6,6 +6,7 @@ const axios = require('axios');
 const app = express();
 const Promise = require('bluebird');
 const controllers = require('./controllers.js');
+const reviewRouter = require('./routes/reviews.js');
 const helpers = require('./helpers.js');
 
 const {
@@ -26,6 +27,8 @@ axios.defaults.baseURL = process.env.BASE_URL;
 // Adds API key to all requests
 axios.defaults.headers.common.Authorization = process.env.API_KEY;
 
+// Setup Routes
+app.use('/reviews', reviewRouter); // directs all requests to endpoint 'reviews' to reviews router
 // set up overview router
 app.use('/overview', overviewRouter);
 

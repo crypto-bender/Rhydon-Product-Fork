@@ -8,4 +8,8 @@ function StarRating({id, rating}) {
     );
 }
 
+<<<<<<< HEAD
 export default StarRating;
+=======
+export default StarRating;
+>>>>>>> main
