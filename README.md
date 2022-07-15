@@ -1,1 +1,1 @@
-# Rhydon Store
+# Rhyd or die

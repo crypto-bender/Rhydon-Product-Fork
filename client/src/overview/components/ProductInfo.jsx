@@ -1,14 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { BsChevronDown, BsChevronUp } from 'react-icons/bs'
+import React, {useEffect, useState} from 'react';
 import StarRating from '../../Related/StarRating.jsx'
-import Description from './Description.jsx';
 
 let ProductInfo = (props) => {
   const [rating, setRating] = useState();
   const [product, setProduct] = useState({});
-  const [count, setCount] = useState();
-  const [toggleDescription, setDescription] = useState(false);
-
   let {name, category, description, slogan, features} = product;
 
   useEffect(() => {
@@ -16,6 +11,7 @@ let ProductInfo = (props) => {
     .then(({data}) => {
       setProduct(prevState => {
         return {
+          ...prevState,
           name: data.name,
           category: data.category,
           description: data.description,
@@ -39,29 +35,18 @@ let ProductInfo = (props) => {
       setRating(prevState => stars/people)
     })
     .catch(err => console.error('setRating error', err));
-
-    props.get('/reviews')
-    .then(({data}) => {
-      setCount(prevState => data.count)
-    })
-    .catch(err => console.error('setCount error', err));
-
   }, [])
 
-  let displayDescription = () => {
-    setDescription(prevState => !prevState)
-  }
-
-  if (!count) return <></>
-
   return (<>
-      <h2>{name}</h2>
+    <>product info</>
+      <h4>{name}</h4>
+      <>{rating ? <StarRating rating={rating}/> : null}</>
       <h5>{category}</h5>
-      <>{rating ? <StarRating rating={rating} count={count}/> : null}</>
-      <div>Read All {count} Reviews</div>
-      <h3 onClick={displayDescription.bind(this)}>Description {toggleDescription ? <BsChevronUp/> : <BsChevronDown/>}</h3>
-      {toggleDescription ? <Description {...product} /> : null}
-
+      <div>{slogan}</div>
+      <div>{description}</div>
+      {features ? features.map(({feature, value}, i) => {
+        return <div key={i}>{feature} : {value}</div>
+      }) : null}
   </>)
 }
 

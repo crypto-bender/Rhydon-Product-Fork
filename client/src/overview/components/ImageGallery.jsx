@@ -1,30 +1,41 @@
 import React, {useState, useEffect} from 'react';
-import Carousel from './Carousel.jsx';
-import MiniSlides from './MiniSlides.jsx';
+import Carousel from './Carousel.jsx'
+import axios from 'axios';
 
-let ImageGallery = ({selectedStyle}) => {
-  if (!selectedStyle) return null
+let ImageGallery = ({get}) => {
 
-  let gallery = selectedStyle.photos
+  const [image, setImage] = useState()
+  const [albumn, setAlbumn] = useState()
 
-  const [currentImage, setCurrentImage] = useState({
-    count: 0,
-    url: gallery[0].url
-  });
-
-  const commonProps = {
-    gallery: gallery,
-    currentImage,
-    setCurrentImage
+  let getImage = () => {
+    get('/overview/styles')
+      .then(({data}) => {
+        setImage(prevState => {
+          return data[0].photos[0].url
+        });
+        setAlbumn(prevState => {
+          return data
+        })
+      })
+      .catch(err => console.log("this is error", err))
   }
 
-  return(<>
-    <Carousel className="image" {...commonProps}/>
-    <MiniSlides {...commonProps}/>
-      {/* // gallery={gallery}
-      // setCurrentImage={setCurrentImage}
-      currentImage={currentImage} */}
-  </>)
+  useEffect(() => {
+    getImage()
+  }, [])
+
+  let show;
+  if (image) {
+    show = (<>
+    <h2>ImageGallery</h2>
+    <div>{image ? <img src={image} width="300" height="300"/> : ''}</div>
+    <Carousel />
+    </>)
+  }
+
+  return(
+    <>{show}</>
+  )
 }
 
 export default ImageGallery
